@@ -26,3 +26,7 @@
 
  <p>첫째 줄부터 N개의 줄에 점을 정렬한 결과를 출력한다.</p>
 
+## 피드백
+comparator과 comparable 차이를 헷갈려서 고민했다.
+comparable는 자연비교, implements한 객체의 기본적인 비교 기준을 정할 때,
+comparator는 비교 기준을 추가 할 때, 사용하자
