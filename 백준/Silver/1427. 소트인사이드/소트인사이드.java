@@ -1,16 +1,20 @@
-import java.util.*;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String s = sc.nextLine();
-        Integer[] arr = new Integer[s.length()];
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int[] counting = new int[10];
+        String s = br.readLine();
+
         for (int i = 0; i < s.length(); i++) {
-            arr[i] = s.charAt(i) - '0';
+            counting[s.charAt(i) - '0']++;
         }
-        Arrays.sort(arr, Collections.reverseOrder());
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i]);
+
+        for (int i = 9; i >= 0 ; i--) {
+            while (counting[i]-- > 0) {
+                System.out.print(i);
+            }
         }
     }
 }
