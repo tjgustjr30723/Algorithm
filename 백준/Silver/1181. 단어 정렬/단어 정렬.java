@@ -1,48 +1,32 @@
-import java.util.*;
-
+import java.io.*;
+import java.util.Arrays;
+import java.util.Comparator;
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();
-        sc.nextLine();
-        Set<Word> words = new TreeSet<Word>();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = Integer.parseInt(br.readLine());
+        String[] str = new String[N];
         for (int i = 0; i < N; i++) {
-            words.add(new Word(sc.nextLine()));
+            str[i] = br.readLine();
         }
-        Iterator<Word> iter = words.iterator();
-        while (iter.hasNext()) {
-            System.out.println(iter.next());
-        }
-    }
-}
-class Word implements Comparable<Word> {
-    private String word;
-
-    public Word(String word) {
-        this.word = word;
-    }
-
-    public int getLength() {
-        return word.length();
-    }
-
-    @Override
-    public int compareTo(Word o1) {
-        if (this.getLength() > o1.getLength()) {
-            return 1;
-        } else if (this.getLength() == o1.getLength()) {
-            for (int i = 0; i < this.getLength(); i++) {
-                if (word.charAt(i) > o1.word.charAt(i)) {
-                    return 1;
-                } else if (word.charAt(i) < o1.word.charAt(i)) {
-                    return -1;
+        Arrays.sort(str, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                if (o1.length() == o2.length()) {
+                    return o1.compareTo(o2);
+                } else {
+                    return o1.length() - o2.length();
                 }
             }
-        } else return -1;
-        return 0;
-    }
-    @Override
-    public String toString() {
-        return word;
+        });
+        StringBuilder sb = new StringBuilder();
+        sb.append(str[0]).append("\n");
+        for (int i = 1; i < N; i++) {
+            if (!str[i].equals(str[i - 1])) {
+                sb.append(str[i]).append("\n");
+            }
+        }
+        System.out.println(sb);
     }
 }
