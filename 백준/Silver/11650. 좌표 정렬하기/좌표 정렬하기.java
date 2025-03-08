@@ -1,43 +1,30 @@
-import java.util.*;
+import java.io.*;
+import java.util.Arrays;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();
-        List<Dot> dots = new ArrayList<Dot>();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = Integer.parseInt(br.readLine());
+        int[][] arr = new int[N][2];
+        StringTokenizer st;
         for (int i = 0; i < N; i++) {
-            dots.add(new Dot(sc.nextInt(), sc.nextInt()));
+            st = new StringTokenizer(br.readLine());
+            arr[i][0] = Integer.parseInt(st.nextToken());
+            arr[i][1] = Integer.parseInt(st.nextToken());
         }
-        Collections.sort(dots);
-        for (int i = 0; i < dots.size(); i++) {
-            System.out.println(dots.get(i).toString());
+        Arrays.sort(arr, (o1, o2) -> {
+            if (o1[0] == o2[0]){
+                return o1[1] - o2[1];
+            } else {
+                return o1[0] - o2[0];
+            }
+        });
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < N; i++) {
+            sb.append(arr[i][0] + " " + arr[i][1]).append("\n");
         }
-    }
-} 
-
-class Dot implements Comparable<Dot> {
-    private int x;
-    private int y;
-
-    public Dot(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-    @Override
-    public int compareTo(Dot o1) {
-        if (this.x > o1.x) {
-            return 1;
-        } else if (this.x == o1.x) {
-            if (this.y > o1.y) {
-                return 1;
-            } else if (this.y == o1.y) {
-                return 0;
-            }else return -1;
-        }else return -1;
-    }
-
-    @Override
-    public String toString() {
-        return x + " " + y;
+        System.out.println(sb);
     }
 }
