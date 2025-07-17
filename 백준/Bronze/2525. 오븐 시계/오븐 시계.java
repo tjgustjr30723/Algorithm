@@ -1,16 +1,23 @@
 import java.util.*;
+import java.io.*;
 
 class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int hour = sc.nextInt();
-        int minute = sc.nextInt();
-        int time = sc.nextInt();
-        cook(hour, minute, time);
-    }
-    public static void cook(int hour, int minute, int time) {
-        hour = (hour + ((minute + time) / 60)) % 24;
-        minute = ((minute + time) % 60);
-        System.out.println(hour + " " + minute);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        int A = Integer.parseInt(st.nextToken());
+        int B = Integer.parseInt(st.nextToken());
+        int C = Integer.parseInt(br.readLine());
+
+        B += C;
+        if (B >= 60) {
+            A += B / 60;
+            B %= 60;
+        }
+        if (A >= 24) {
+            A %= 24;
+        }
+        System.out.println(A + " " + B);
     }
 }
