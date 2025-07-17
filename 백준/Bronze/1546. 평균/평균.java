@@ -1,41 +1,24 @@
 import java.util.*;
+import java.io.*;
 
 class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();
-        Exam exam = new Exam(N, sc);
-        exam.fix();
-    }
-}
-class Exam{
-    private double[] array;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
 
-    public Exam(int N, Scanner sc) {
-        this.array = new double[N];
-        init(sc);
-    }
-    public void init(Scanner sc) {
-        for (int i = 0; i < array.length; i++) {
-            array[i] = sc.nextDouble();
+        int N = Integer.parseInt(br.readLine());
+        st = new StringTokenizer(br.readLine());
+        int[] arr = new int[N];
+        int max = 0;
+        for (int i = 0; i < N; i++) {
+            arr[i] = Integer.parseInt(st.nextToken());
+            max = Math.max(max, arr[i]);
         }
-    }
-    public double findMax() {
-        double max = array[0];
-        for (int k = 1; k < array.length; k++) {
-            if (array[k] > max) {
-                max = array[k];
-            }
+
+        double result = 0;
+        for (int i = 0; i < N; i++) {
+            result += (double) arr[i] /max*100;
         }
-        return max;
-    }
-    public void fix() {
-        double sum = 0;
-        double max = findMax();
-        for (int i = 0; i < array.length; i++) {
-            sum += (array[i] / max) * 100;
-        }
-        double average = sum / array.length;
-        System.out.println(average);
+        System.out.println(result / (double) N);
     }
 }
