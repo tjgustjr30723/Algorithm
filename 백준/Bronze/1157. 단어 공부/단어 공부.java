@@ -7,9 +7,9 @@ class Main {
         String s = br.readLine();
         for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) >= 'A' && s.charAt(i) <= 'Z') {
-                arr[s.charAt(i) - 'A']++;
+                arr[s.charAt(i) - 65]++;
             } else
-                arr[s.charAt(i) - 'a']++;
+                arr[s.charAt(i) - 97]++;
         }
         int max = -1;
         char c = '?';
