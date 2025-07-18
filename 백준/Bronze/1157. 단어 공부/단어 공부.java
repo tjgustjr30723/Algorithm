@@ -1,47 +1,31 @@
+import java.io.*;
 import java.util.*;
-import java.util.Arrays;
+class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String s = sc.nextLine().toUpperCase();
-        Study s1 = new Study(s);
-        s1.check();
-    }
-}
-class Study {
-    private String s;
-    
-    public Study(String s) {
-        this.s = s;
-    }
-    
-    public void check() {
-        char[] charArray = s.toCharArray();
-        Arrays.sort(charArray);
-        String str = new String(charArray);
+        String str = br.readLine();
+        char[] chars = str.toUpperCase().toCharArray();
+        Map<Character, Integer> map = new HashMap<>();
+        for (char c : chars) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
 
-        int max = 0, count = 1;
-        char c = str.charAt(0);
-        for (int i = 1; i < str.length(); i++) {
-            if (str.charAt(i) == str.charAt(i - 1)) {
-                count++;
-            } else {
-                if (count > max) {
-                    max = count;
-                    c = str.charAt(i - 1);
-                } else if (count == max) {
-                    c = '?';
+        int max = Collections.max(map.values());
+
+        long count = map.entrySet().stream()
+                .filter(e -> e.getValue() == max)
+                .count();
+
+        if (count > 1) {
+            System.out.println("?");
+        } else {
+            for (Map.Entry<Character, Integer> entry : map.entrySet()) {
+                if (entry.getValue() == max) {
+                    System.out.println(entry.getKey());
+                    break;
                 }
-                count = 1;
             }
         }
-        if (count > max) {
-            c = str.charAt(str.length() - 1);
-
-        } else if (count == max) {
-            c = '?';
-        }
-        System.out.println(c);
     }
 }
