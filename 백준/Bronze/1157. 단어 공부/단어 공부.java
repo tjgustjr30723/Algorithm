@@ -1,31 +1,26 @@
 import java.io.*;
-import java.util.*;
 class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        String str = br.readLine();
-        char[] chars = str.toUpperCase().toCharArray();
-        Map<Character, Integer> map = new HashMap<>();
-        for (char c : chars) {
-            map.put(c, map.getOrDefault(c, 0) + 1);
+        int[] arr = new int[26];
+        String s = br.readLine();
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) >= 'A' && s.charAt(i) <= 'Z') {
+                arr[s.charAt(i) - 'A']++;
+            } else
+                arr[s.charAt(i) - 'a']++;
         }
-
-        int max = Collections.max(map.values());
-
-        long count = map.entrySet().stream()
-                .filter(e -> e.getValue() == max)
-                .count();
-
-        if (count > 1) {
-            System.out.println("?");
-        } else {
-            for (Map.Entry<Character, Integer> entry : map.entrySet()) {
-                if (entry.getValue() == max) {
-                    System.out.println(entry.getKey());
-                    break;
-                }
+        int max = -1;
+        char c = '?';
+        for (int i = 0; i < 26; i++) {
+            if (arr[i] > max){
+                max = arr[i];
+                c = (char)(i+65);
+            }else if (arr[i] == max){
+                c = '?';
             }
         }
+        System.out.println(c);
     }
 }
