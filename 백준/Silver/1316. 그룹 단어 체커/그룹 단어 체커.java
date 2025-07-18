@@ -1,8 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 class Main {
     public static void main(String[] args) throws IOException {
@@ -11,19 +9,20 @@ class Main {
         int count = 0;
         for (int i = 0; i < N; i++) {
             String s = br.readLine();
-            List<Character> list = new ArrayList<>();
+            boolean[] visited = new boolean[26];
             char ch = s.charAt(0);
-            list.add(ch);
             boolean flag = true;
+            visited[ch - 'a'] = true;
             for (int j = 1; j < s.length(); j++) {
-                if (s.charAt(j) != ch){
-                    if (list.contains(s.charAt(j))){
+                char ch1 = s.charAt(j);
+                if (ch1 != ch){
+                    if (visited[ch1 - 'a']){
                         flag = false;
                         break;
                     }
-                    ch = s.charAt(j);
-                    list.add(ch);
+                    visited[ch1 - 'a'] = true;
                 }
+                ch = s.charAt(j);
             }
             if (flag){
                 count++;
