@@ -1,22 +1,34 @@
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        char[][] arr = new char[5][15];  // 최대 길이 15로 설정
+class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        String[][] arr = new String[5][15];
 
+        String[] str;
+        int max = 0;
         for (int i = 0; i < 5; i++) {
-            String line = sc.next();
-            for (int j = 0; j < line.length(); j++) {
-                arr[i][j] = line.charAt(j);
+            str = br.readLine().split("");
+            if (max < str.length) {
+                max = str.length;
+            }
+            for (int j = 0; j < str.length; j++) {
+                arr[i][j] = str[j];
             }
         }
-        for (int j = 0; j < 15; j++) {
-            for (int i = 0; i < 5; i++) {
-                if (arr[i][j] != '\0') {  // 기본값 '\0'인지 확인 후 출력
-                    System.out.print(arr[i][j]);
+
+        for (int i = 0; i < max; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (arr[j][i] == null) {
+                    continue;
                 }
+                sb.append(arr[j][i]);
             }
         }
+
+        System.out.println(sb);
     }
 }
