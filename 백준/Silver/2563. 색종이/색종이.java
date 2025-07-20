@@ -1,31 +1,39 @@
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt(); // 색종이 수
-        boolean[][] arr = new boolean[100][100];
+class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+        int N = Integer.parseInt(br.readLine());
 
-        for (int i = 0; i < n; i++) {
-            int x = sc.nextInt();
-            int y = sc.nextInt();
-            for (int j = x ; j < x + 10; j++) {
-                for (int k = y ; k < y + 10; k++) {
-                    if (arr[j][k]){
-                        continue;
-                    }
-                    arr[j][k] = true;
+        int[][] arr = new int[N][2];
+        boolean[][] flag = new boolean[100][100];
+
+        for (int i = 0; i < N; i++) {
+            st = new StringTokenizer(br.readLine());
+            for (int j = 0; j < 2; j++) {
+                arr[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < 10; j++) {
+                for (int k = 0; k < 10; k++) {
+                    flag[arr[i][0] + j][arr[i][1] + k] = true;
                 }
             }
         }
         int count = 0;
         for (int i = 0; i < 100; i++) {
             for (int j = 0; j < 100; j++) {
-                if (arr[i][j]) {
+                if (flag[i][j]) {
                     count++;
                 }
             }
         }
         System.out.println(count);
+
     }
 }
