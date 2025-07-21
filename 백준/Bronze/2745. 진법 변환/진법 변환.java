@@ -1,36 +1,30 @@
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        StringBuilder sb = new StringBuilder(sc.next());
-        int N = sc.nextInt();
-        Study study = new Study(N, sb);
-        study.cul();
-    }
-} 
-class Study {
-    private String s;
-    private int N;
-    public Study(int N, StringBuilder sb) {
-        this.s = sb.reverse().toString();
-        this.N = N;
-    }
+class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-    public void cul() {
-        int num = 1;
+        String str = st.nextToken();
+        int N = Integer.parseInt(st.nextToken());
+
         int sum = 0;
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            int digit;
-            if (Character.isDigit(c)) {
-                digit = c - '0'; // 숫자 처리
+        int a;
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) >= 'A' && str.charAt(i) <= 'Z') {
+                a = str.charAt(i) - 55;
             } else {
-                digit = c - 'A' + 10; // 알파벳 처리
+                a = str.charAt(i) - 48;
             }
-            sum += digit*num;
-            num *= N;
+            for (int j = str.length() - 1; j > i; j--){
+                a *= N;
+            }
+            sum += a;
         }
         System.out.println(sum);
+
     }
 }
