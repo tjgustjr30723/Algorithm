@@ -1,16 +1,14 @@
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        long n = sc.nextLong();
-        long sum = 0;
+class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
 
-        for (long i = 1; i <= n - 2; i++) {
-            sum += i * (i+1) / 2;
-        }
-
-        System.out.println(sum);
+        long count = ((long) n * (n-1) * (n-2)) / 6;
+        System.out.println(count);
         System.out.println(3);
     }
 }
