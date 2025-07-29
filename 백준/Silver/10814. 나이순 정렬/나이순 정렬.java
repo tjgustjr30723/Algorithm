@@ -1,36 +1,33 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
 import java.util.*;
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();
-        sc.nextLine();
-        List<User> list = new LinkedList<User>();
+class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+        int N = Integer.parseInt(br.readLine());
+
+        StringBuilder[] strs = new StringBuilder[201];
+
         for (int i = 0; i < N; i++) {
-            list.add(new User(sc.nextInt(), sc.nextLine()));
+            st = new StringTokenizer(br.readLine());
+            int age = Integer.parseInt(st.nextToken());
+            if (strs[age] == null) {
+                strs[age] = new StringBuilder();
+                strs[age].append(age).append(" ").append(st.nextToken()).append("\n");
+                continue;
+            }
+            strs[age].append(age).append(" ").append(st.nextToken()).append("\n");
         }
-        Collections.sort(list);
-        for (User l : list) {
-            System.out.println(l);
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 201; i++) {
+            if (strs[i] != null) {
+                sb.append(strs[i]);
+            }
         }
-    }
-}
-class User implements Comparable<User> {
-    private int age;
-    private String name;
-
-    public User(int age, String word) {
-        this.age = age;
-        this.name = word;
-    }
-
-    @Override
-    public int compareTo(User o1) {
-        return this.age != o1.age ? this.age - o1.age : 0;
-    }
-
-    @Override
-    public String toString() {
-        return age + name;
+        System.out.println(sb);
     }
 }
