@@ -1,29 +1,34 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
 import java.util.*;
 
-public class Main {
+class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
-        Map<Integer, Integer> map = new HashMap<>();
+
         int N = Integer.parseInt(br.readLine());
-        int[] arr1 = new int[N];
-        int[] arr2 = new int[N];
-        st = new StringTokenizer(br.readLine());
+
+        int[] origin  = new int[N];
+        int[] sorted  = new int[N];
+
+        Map<Integer, Integer> map = new HashMap<>();
+        StringTokenizer st = new StringTokenizer(br.readLine());
         for (int i = 0; i < N; i++) {
-            arr1[i] = arr2[i] = Integer.parseInt(st.nextToken());
+            sorted[i] = origin[i] = Integer.parseInt(st.nextToken());
         }
-        Arrays.sort(arr1);
-        int count = 0;
-        for (int i = 0; i < N; i++) {
-            if (!map.containsKey(arr1[i])) {
-                map.put(arr1[i], count);
-                count++;
+        Arrays.sort(sorted);
+        int i = 0;
+        for (int num : sorted) {
+            if (!map.containsKey(num)) {
+                map.put(num, i);
+                i++;
             }
         }
-        StringBuilder sb= new StringBuilder();
-        for (int i = 0; i < N; i++) {
-            sb.append(map.get(arr2[i])).append(" ");
+        StringBuilder sb = new StringBuilder();
+        for (int j = 0; j < N; j++) {
+            int value = map.get(origin[j]);
+            sb.append(value).append(" ");
         }
         System.out.println(sb);
     }
