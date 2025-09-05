@@ -1,26 +1,32 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
 import java.util.*;
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();
-        int M = sc.nextInt();
+class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
         Map<Integer, String> map1 = new HashMap<>();
         Map<String, Integer> map2 = new HashMap<>();
         for (int i = 0; i < N; i++) {
-            String poketmon = sc.next();
-            map1.put(i+1, poketmon);
-            map2.put(poketmon, i+1);
+            String str = br.readLine();
+            map1.put(i + 1, str);
+            map2.put(str, i + 1);
         }
-        String[] str = new String[M];
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < M; i++) {
-            String findPoketmon = sc.next();
-            if (findPoketmon.charAt(0) >= '1' && findPoketmon.charAt(0) <= '9') {
-                str[i] = map1.get(Integer.parseInt(findPoketmon));
-            } else str[i] = String.valueOf(map2.get(findPoketmon));
+            String s = br.readLine();
+            char c = s.charAt(0);
+            if (c >= '0' && c <= '9') {
+                sb.append(map1.get(Integer.parseInt(s))).append("\n");
+            } else {
+                sb.append(map2.get(s)).append("\n");
+            }
         }
-        for (int i = 0; i < M; i++) {
-            System.out.println(str[i]);
-        }
+        System.out.println(sb);
     }
 }
