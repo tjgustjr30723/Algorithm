@@ -1,23 +1,28 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
 import java.util.*;
 
-public class Main {
+class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
         StringTokenizer st;
         int N = Integer.parseInt(br.readLine());
-        Map<String, Integer> map = new HashMap<>();
+        int[] arr = new int[20_000_001];
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < N; i++) {
-            String num1 = st.nextToken();
-            map.put(num1, map.getOrDefault(num1, 0) + 1);
+            int index = Integer.parseInt(st.nextToken());
+            arr[index + 10_000_000]++;
         }
+
         int M = Integer.parseInt(br.readLine());
+
+        StringBuilder sb = new StringBuilder();
+
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < M; i++) {
-            String num2 = st.nextToken();
-            sb.append(map.getOrDefault(num2, 0)).append(" ");
+            int num = Integer.parseInt(st.nextToken());
+            sb.append(arr[num + 10_000_000]).append(" ");
         }
         System.out.println(sb);
     }
