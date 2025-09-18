@@ -1,26 +1,27 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
 
-public class Main {
+class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        boolean[] arr = new boolean[246913];
+
         StringBuilder sb = new StringBuilder();
-        int n = 1;
         while (true) {
-            n = Integer.parseInt(br.readLine());
-            if (n == 0) {
-                break;
-            }
-            boolean[] prime = new boolean[2*n + 1];
+            int n = Integer.parseInt(br.readLine());
+            if (n == 0) break;
             int count = 0;
-            for (int i = 2; i <= 2*n; i++) {
-                if (prime[i]) {
+            for (int i = 2; i <= 2 * n; i++) {
+                if (arr[i]) {
                     continue;
                 }
                 if (i > n) {
                     count++;
                 }
-                for (int j = i + i; j <= 2*n; j += i) {
-                    prime[j] = true;
+                for (int j = i + i; j <= 2 * n; j += i) {
+                    arr[j] = true;
                 }
             }
             sb.append(count).append("\n");
