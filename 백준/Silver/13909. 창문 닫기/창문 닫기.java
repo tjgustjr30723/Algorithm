@@ -1,13 +1,18 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
 
-
-public class Main {
+class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
+
+        int N = Integer.parseInt(br.readLine());
+
+        int num = 1;
         int count = 0;
-        for (int i = 1; i * i <= n; i++) {
+        while (num * num <= N) {
             count++;
+            num++;
         }
         System.out.println(count);
     }
